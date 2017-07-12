@@ -16,8 +16,8 @@ def doubleCode(f):
     im = im.convert('RGB')
     im = im.resize((200,80))
     a = array(im)
-    for i in xrange(len(a)):
-        for j in xrange(len(a[i])):
+    for i in range(len(a)):
+        for j in range(len(a[i])):
             if a[i][j][0] == 255:
                 a[i][j]=[0,0,0]
             else:
@@ -26,9 +26,37 @@ def doubleCode(f):
     im.show()
     return pytesseract.image_to_string(im)
 
-print '-----simple code----'
-print simpleCode('./images/20169992024422.png')
-print simpleCode('./images/7025.jpg')
-print '-----double code----'
-print doubleCode('./images/20169992024422.png')
-print doubleCode('./images/7025.jpg')
+def devide():
+    threshold = 140
+    table = []
+    for i in range(256):
+        if i < threshold:
+            table.append(0)
+        else:
+            table.append(1)
+    return table
+
+def devideCode(f):
+    table = devide()
+    im = Image.open(f)
+    # convert to grey-scale map
+    imgry = im.convert('L')
+    # save image
+    # imgry.save('g'+f)
+    # devide
+    out = imgry.point(table, '1')
+    # out.save('b', f)
+    text = pytesseract.image_to_string(out)
+    return text
+
+print ('-----simple code----')
+print (simpleCode('./images/20169992024422.png'))
+print (simpleCode('./images/7025.jpg'))
+print ('-----double code----')
+print (doubleCode('./images/20169992024422.png'))
+print (doubleCode('./images/7025.jpg'))
+print ('-----devide code----')
+print (devideCode('./images/20169992024422.png'))
+print (devideCode('./images/7025.jpg'))
+
+print (Image.open('./images/7025.jpg'))
