@@ -1,2 +1,2 @@
-# py
-python sample
+# python sample
+the sample of python
