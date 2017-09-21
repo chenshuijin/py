@@ -23,7 +23,10 @@ def gethtmlfromweb(url):
     html =  html.decode("utf-8")
     return html
 
-ptable = re.compile('<table[\s|\S]*</table>')
-
 def gettable(s):
+    ptable = re.compile('<table[\s|\S]*</table>')
     return ptable.findall(s)
+
+def gettr(s):
+    ptr = re.compile('<tr[\s|\S]*</tr>')
+    return ptr.search(s)
