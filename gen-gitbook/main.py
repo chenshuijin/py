@@ -11,9 +11,10 @@ url = 'http://www.runoob.com/linux/linux-command-manual.html'
 
 html = help.readfromhtml('html')
 tables = help.gettable(html)
-print (len(tables))
 table = tables[0]
 trs = help.gettr(table)
+#print (trs1)
+#for tr in range trs.group():
+#    print (tr)
 print (trs)
-print (trs.group(1))
-print (trs.groups())
+print (len(trs))

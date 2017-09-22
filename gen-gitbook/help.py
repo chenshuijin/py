@@ -28,5 +28,10 @@ def gettable(s):
     return ptable.findall(s)
 
 def gettr(s):
-    ptr = re.compile('<tr[\s|\S]*</tr>')
-    return ptr.search(s)
+    ptr = re.compile('<tr[\s|\S]*</tr>', re.M|re.I)
+    tr = ptr.findall(s)[0]
+    if tr:
+        ptr = re.compile('</tr>', re.M|re.I)
+        return ptr.split(s)
+    else:
+        return None
